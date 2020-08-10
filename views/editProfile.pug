@@ -1,8 +1,14 @@
 extends layouts/main
 
 block content
-    .form__container
+    .form-container
         form(action=routes.editProfile, method="post")
             label(for="avatar") Avatar
             input(type="file", id="avatar", name="avatar") 
+            input(type="text", placeholder="Name", name="name")
+            input(type="email", placeholder="Email", name="email")
+            input(type="submit", value="Update Profile") 
             //아바타 편집을 위함
+
+        a.form-contaoiner__link(href="routes.changePassword") Change Password
+        //routes.changePassword로 이동하는 링크

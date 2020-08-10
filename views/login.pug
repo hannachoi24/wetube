@@ -1,7 +1,7 @@
 extends layouts/main
 
 block content
-    .form__container
+    .form-container
         form(action=routes.login, method="post")
             // method는 post로 해야됨 정보를 비밀로 유지해야되기 때문
             input(type="email", name="email", placehorder="Email")
