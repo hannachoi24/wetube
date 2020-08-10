@@ -1,0 +1,20 @@
+//class
+
+header.header
+    .header__column
+        a(href=routes.home) 
+            i.fab.fa-youtube
+    .header__column
+        form(action=routes.search, method="get") 
+            input(type="text", placeholder="Search by term...", name="term") 
+        //url에 있는 값들을 보고 싶어서
+        //get method가 url에 정보를 추가해줌
+
+    .header__column
+        ul 
+            li
+                a(href=routes.join) Join
+            li
+                a(href=routes.login) Log In
+                
+                //href는 링크개념
