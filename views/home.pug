@@ -2,4 +2,7 @@ extends layouts/main
 
 block content
     .videos
-        h1 Video
+        h1 Video 
+        each item in videos /* each 변수명 in videoController에서 전달한 인수 이름 ->videos 배열에서 하나씩 템플릿을 적용*/  
+            h1= item.title  
+            p= item.description   
