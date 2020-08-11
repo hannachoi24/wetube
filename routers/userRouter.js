@@ -11,7 +11,7 @@ const userRouter = express.Router();
 
 userRouter.get(routes.editProfile, editProfile); //userDetail보다 위에 있어야함 -> id가 editProfile로 인식
 userRouter.get(routes.changePassword, changePassword);
-userRouter.get(routes.userDetail, userDetail);
+userRouter.get(routes.userDetail(), userDetail);
 
 export default userRouter; 
 

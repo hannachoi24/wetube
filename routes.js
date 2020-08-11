@@ -29,12 +29,26 @@ const routes = {
     logout: LOGOUT,
     search: SEARCH,
     users: USERS,
-    userDetail: USER_DETAIL,
+    userDetail: id => {  /*profile눌렀을 때 미들웨어에 설정된 id가 url에 들어가도록 하고 싶어서
+                          왜냐하면 express는 이해하지만, HTML은 routes를 이해하지 못하기 때문에 
+                          userRouter도 수정해야함 함수가 실제로 실행되야 되기 때문에 */
+      if (id) {
+        return `/users/${id}`;  
+      } else {
+        return USER_DETAIL;  
+      }  
+    },
     editProfile: EDIT_PROFILE,
     changePassword: CHANGE_PASSWORD,
     videos: VIDEOS,
     upload: UPLOAD,
-    videoDetail: VIDEO_DETAIL,
+    videoDetail: id => {
+      if (id) {
+        return `/videos/${id}`;
+      } else {
+        return VIDEO_DETAIL;  
+      }
+    },
     editVideo: EDIT_VIDEO,
     deleteVideo: DELETE_VIDEO
 };

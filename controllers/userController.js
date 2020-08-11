@@ -19,7 +19,11 @@ export const postJoin = (req, res) => { //method가 post인(join.pug) 경로에�
 };
 // join하면 login창으로가고 그다음 home화면으로 갈 수 있게 하려고 -> globalRouter.js에서도 이름 변경
 
-export const login = (req, res) => res.render("login", { pageTitle: "Log In"} );
+export const getLogin = (req, res) => res.render("login", { pageTitle: "Log In"});
+export const postLogin = (req, res) => {
+    res.redirect(routes.home);
+};
+
 export const logout = (req, res) => res.render("logout", { pageTitle: "Log Out"});
 export const userDetail = (req, res) => res.render("userDetail", { pageTitle: "User Detail"});
 export const editProfile = (req, res) => res.render("editProfile", { pageTitle: "Edit Profile"});
