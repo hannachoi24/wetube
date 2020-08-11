@@ -1,0 +1,7 @@
+mixin videoBlock(video = {}) 
+    .videoBlock 
+        video.videoBlock__thumbnail(src=video.videoFile, controls=true) 
+        //video태그의 클래스
+        h4.videoBlock__title=video.title
+        h6.videoBlock__views=video.views
+    

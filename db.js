@@ -4,7 +4,7 @@ export const videos = [ //videoControllers의 home에서 video 목록을 받아�
        title: "Video awesome",
        description: "This is something I love",
        views: 24,
-       videoFile: "https://archive.org/details/BigBuckBunny_124",
+       videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
        creator: {
            id:12122,
            name: "Hanna",
@@ -16,7 +16,7 @@ export const videos = [ //videoControllers의 home에서 video 목록을 받아�
         title: "Video super",
         description: "This is something I love",
         views: 24,
-        videoFile: "https://archive.org/details/BigBuckBunny_124",
+        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
         creator: {
             id:12122,
             name: "Hanna",
@@ -28,7 +28,7 @@ export const videos = [ //videoControllers의 home에서 video 목록을 받아�
         title: "Video nice",
         description: "This is something I love",
         views: 24,
-        videoFile: "https://archive.org/details/BigBuckBunny_124",
+        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
         creator: {
             id:12122,
             name: "Hanna",
@@ -40,7 +40,7 @@ export const videos = [ //videoControllers의 home에서 video 목록을 받아�
         title: "Video perfect",
         description: "This is something I love",
         views: 24,
-        videoFile: "https://archive.org/details/BigBuckBunny_124",
+        videoFile: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
         creator: {
             id:12122,
             name: "Hanna",
