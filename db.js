@@ -14,7 +14,7 @@ mongoose.connect(
 
 const db = mongoose.connection;
 
-const handleOpen = () => console.log("✅ Connected to DB"); //connect을 열고 연결확인여부 함수 생성
+const handleOpen = () => console.log("✅ Connected to DB"); //connect를 열고 연결확인여부하는 function 생성
 const handleError = error => console.log('❌ Error on DB Connection:${error}');
 
 db.once("open", handleOpen);
