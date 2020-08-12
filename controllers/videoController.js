@@ -1,4 +1,3 @@
-import {videos} from "../db"; //home 화면에 접속하면 video 목록을 받아옴
 import routes from "../routes"; //default export할 때는 이런형식으로 import
 
 export const home = (req, res) => {
