@@ -1,10 +1,11 @@
 //Database와 연결
 
 import mongoose from "mongoose";
-
+import dotenv from "dotenv";
+dotenv.config(); //dotenv.config함수로 .env 파일 안에 있는 정보를 불러올 수 있음
 
 mongoose.connect(
-    "mongodb://localhost:27017/WeTube", // 여기서 우리한테 요청하는건 string으로 된 Database, 어디에 Database가 저장되어있는지 알려줌
+   process.env.MONGO_URL,  // 찾은 모든 변수들을 process.env.key에 저장
    {
      useNewUrlParser: true,
      useFindAndModify: false
