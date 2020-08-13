@@ -11,22 +11,30 @@ export const home = async (req, res) => { //async는 JS가 어떤부분을 기�
   res.render("home", { pageTitle: "Home", videos: [] });
   }                                                                                                    
 };           
-                                                                    
+
 export const search = (req, res) => {
   const {query: { term: searchingBy }
 } = req; //= const searchingBy = req,query.term 
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
+// upload 또한 upload를 준비하기 위한 get 페이지와 실제 데이터를 보내는 post 페이지가 필요하다.
 export const getUpload = (req, res) => 
   res.render("upload", { pageTitle: "Upload"});
 
-export const postUpload = (req, res) => {
-  const {
-    body: { file, title, description }
+export const postUpload = async(req, res) => {
+  const {                         // const { body, file } 를 통해 body와 file을 받아와 요청하는 정보들을 확인한다. 이는 pug와 db.js를 확인해야하는 듯 하다.
+    body: { title, description },
+    file: { path } // 파일을 form으로 부터 받아올 필요없어짐
   } = req;
-  // To Do: Upload and save video
-  res.redirect(routes.videoDetail(324393));
+  const newVideo = await Video.create({
+    fileUrl: path,
+    title, // 위와같음
+    description
+    // 여기있는 fileUrl, title, description은 videoDB의 속성이다.  
+  });
+  console.log(newVideo);
+  res.redirect(routes.videoDetail(newVideo.id));
 }; 
 
 
