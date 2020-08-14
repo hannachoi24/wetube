@@ -3,9 +3,8 @@ extends layouts/main
 block content
     .video__player
         video(src=`/${video.fileUrl}`)
-        //- 서버에 있는 파일이기 때문      
     .video__info
-        a(href=routes.editVideo) Edit video
+        a(href=routes.editVideo(video.id)) Edit video
         h5.video__title=video.title
         span.video__views=video.views
-        p.video__description=video.description
+        p.video__description=video.description 
