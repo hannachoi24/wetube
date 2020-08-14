@@ -16,7 +16,7 @@ const CHANGE_PASSWORD = "/change-password";
 
 const VIDEOS = "/videos";
 const UPLOAD = "/upload";
-const VIDEO_DETAIL = "/:id";
+const VIDEO_DETAIL = "/:id"; //:과 이름을 넣는 것은 controller에서 어떤 data를 갖고 있다는 것을 표현->URL로 부터 정보를 가져오는 방법
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
 

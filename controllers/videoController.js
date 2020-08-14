@@ -38,8 +38,17 @@ export const postUpload = async(req, res) => {
 }; 
 
 
-export const videoDetail = (req, res) => 
-  res.render("videoDetail", { pageTitle: "Video Detail"});
+export const videoDetail = async(req, res) => {
+  const {
+    params: { id } //params로 부터 id 가져옴
+  } = req;
+  try {
+    const video = await Video.findById(id); // id를 받고 query로 보내짐
+    res.render("videoDetail", { pageTitle: "Video Detail", video}); // video 변수를 템플릿에 전달
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};  
 
 export const editVideo = (req, res) =>
   res.render("editVideo", { pageTitle: "Edit Video"});
