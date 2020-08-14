@@ -15,11 +15,21 @@ export const home = async (req, res) => {
   }
 };
 
-export const search = (req, res) => {
+// Search
+
+export const search = async (req, res) => {
   const {
     query: { term: searchingBy },
   } = req; //= const searchingBy = req,query.term
-  res.render("search", { pageTitle: "Search", searchingBy });
+  let videos = [];
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" }, // 내가 찾고자하는 단어가 포함되는 것을 찾음(regular expression)
+    }); // "i"는 대소문자를 구분하지 않음
+  } catch (error) {
+    console.log(error);
+  }
+  res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
 // upload 또한 upload를 준비하기 위한 get 페이지와 실제 데이터를 보내는 post 페이지가 필요하다.
