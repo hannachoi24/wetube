@@ -2,7 +2,8 @@ import multer from "multer";
 import routes from "./routes";
 
 //configure하는 과정
-const multerVideo = multer({ dest: "videos/" }); // file을 Upload하고 URL을 반환하는 middleware가 필요
+const multerVideo = multer({ dest: "uploads/videos/" }); // /uploads/videos/ 는 내 컴퓨터의 root에 upload를만듬
+// file을 Upload하고 URL을 반환하는 middleware가 필요
 
 export const localsMiddleware = (req, res, next) => {
     res.locals.siteName = "WeTube";

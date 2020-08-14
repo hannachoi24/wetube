@@ -15,6 +15,7 @@ const app = express(); //express를 실행한 결과를 app 상수로 만들었�
 
 app.use(helmet()); //보안기능
 app.set("view engine", "pug"); // (name, value)
+app.use("/uploads", express.static("uploads")); // directory에서 file을 전달하는 middleware 함수(file만)
 app.use(cookieParser()); //cookie를 전달받아서 사용할 수 있도록 만들어주는 middleware 
 app.use(bodyParser.json()); //유저가 json을 전송하면 서버가 json을 이해할 수 있게
 app.use(bodyParser.urlencoded({ extended: true })); //유저가 일반적인 html form을 전송한다면 서버가 urlencoded를 이해할 수 있게
