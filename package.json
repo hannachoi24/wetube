@@ -6,7 +6,8 @@
   "author": "Hanna Choi",
   "scripts": {
     "dev:server": "nodemon --exec babel-node init.js --delay 2",
-    "dev:assets": "webpack"
+    "dev:assets": "WEBPACK_ENV=development webpack",
+    "build:assets": "WEBPACK_ENV=production webpack"
   },
   "dependencies": {
     "@babel/core": "^7.11.1",
@@ -16,6 +17,7 @@
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "helmet": "^4.0.0",
     "mongoose": "^5.9.28",
     "morgan": "^1.10.0",
