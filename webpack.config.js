@@ -14,11 +14,7 @@ const config = {
     rules: [
       {
         test: /\.(js)$/,
-        use: [
-          {
-            loader: "babel-loader",
-          },
-        ],
+        use: ["babel-loader"],
       },
       {
         test: /\.(scss)$/, // scss파일을 만나게 되면
