@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { localsMiddleware } from "./middlewares";
 import routes from "./routes";
-import userRouter from "./routers/userRouter"; 
+import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 
@@ -16,7 +16,8 @@ const app = express(); //express를 실행한 결과를 app 상수로 만들었�
 app.use(helmet()); //보안기능
 app.set("view engine", "pug"); // (name, value)
 app.use("/uploads", express.static("uploads")); // directory에서 file을 전달하는 middleware 함수(file만)
-app.use(cookieParser()); //cookie를 전달받아서 사용할 수 있도록 만들어주는 middleware 
+app.use("/static", express.static("static"));
+app.use(cookieParser()); //cookie를 전달받아서 사용할 수 있도록 만들어주는 middleware
 app.use(bodyParser.json()); //유저가 json을 전송하면 서버가 json을 이해할 수 있게
 app.use(bodyParser.urlencoded({ extended: true })); //유저가 일반적인 html form을 전송한다면 서버가 urlencoded를 이해할 수 있게
 app.use(morgan("dev")); //middleware을 먼저 그 다음 route 작성
@@ -27,5 +28,3 @@ app.use(routes.users, userRouter); //누군가 /user 경로에 접속하면 이 
 app.use(routes.videos, videoRouter);
 
 export default app; //누군가가 내 파일을 불러올 때(import) app obj를 주겠다는 의미(app.js를 init.js에서 사용)
-
-
