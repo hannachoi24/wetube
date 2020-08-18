@@ -1,28 +1,23 @@
 //class
 
-header.header
-    .header__column
-        a(href=routes.home) 
-            i.fab.fa-youtube
-    .header__column
-        form(action=routes.search, method="get") 
-            input(type="text", placeholder="Search by term...", name="term") 
-        //url에 있는 값들을 보고 싶어서
-        //get method가 url에 정보를 추가해줌
-
-    .header__column
-        ul 
-            if !user.isAuthenticated
-                li
-                   a(href=routes.join) Join
-                li
-                   a(href=routes.login) Log In
-                //href는 링크개념
-            else
-                li
-                   a(href=`/videos${routes.upload}`) Upload
-                li
-                   a(href=routes.userDetail(user.id)) Profile
-                li
-                   a(href=routes.logout) Log Out      
-                    
+.header__wrapper
+        .header__column
+            a(href=routes.home)
+                i.fab.fa-youtube
+        .header__column
+            form(action=routes.search, method="get")
+                input(type="text", placeholder="Search by term...", name="term")
+        .header__column
+            ul
+                if !user.isAuthenticated
+                    li
+                        a(href=routes.join) Join
+                    li
+                        a(href=routes.login) Log In
+                else 
+                    li
+                        a(href=`/videos${routes.upload}`) Upload
+                    li
+                        a(href=routes.userDetail(user.id)) Profile
+                    li
+                        a(href=routes.logout) Log Out
