@@ -7,11 +7,19 @@ const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js"); // ENTRY�
 const OUTPUT_DIR = path.join(__dirname, "static"); // OUTPUT은 파일들을 어디에 넣을 것인가?, "static" 이라는 폴더로 보내라(export) 할 것임
 
 const config = {
-  entry: ENTRY_FILE,
+  entry: ["@babel/polyfill", ENTRY_FILE],
   mode: MODE,
   module: {
     // 모듈을 발견할 때 마다 다음의 rules를 따르라
     rules: [
+      {
+        test: /\.(js)$/,
+        use: [
+          {
+            loader: "babel-loader",
+          },
+        ],
+      },
       {
         test: /\.(scss)$/, // scss파일을 만나게 되면
         use: [
