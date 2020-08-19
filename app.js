@@ -1,10 +1,13 @@
+import dotenv from "dotenv";
 import express from "express"; //express를 import 해줌
 import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
+import mongoose from "mongoose"; // mongoDB와의 연결을 하기위해
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middlewares";
 import routes from "./routes";
 import userRouter from "./routers/userRouter";
@@ -13,7 +16,11 @@ import globalRouter from "./routers/globalRouter";
 
 import "./passport";
 
+dotenv.config();
+
 const app = express(); //express를 실행한 결과를 app 상수로 만들었음
+
+const CokieStore = MongoStore(session);
 
 // middleware
 
@@ -30,6 +37,7 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: true,
     saveUninitialized: false,
+    store: new CokieStore({ mongooseConnection: mongoose.connection }), // CokieStore와 mongo 간의 연결(CokieStore를 데이터베이스에 연결하기위해)
   })
 );
 app.use(passport.initialize()); // passport가 찾은 그 사용자를 req.user로 만들어줌
