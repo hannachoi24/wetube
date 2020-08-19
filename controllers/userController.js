@@ -41,6 +41,10 @@ export const postLogin = passport.authenticate("local", {
   successRedirect: routes.home,
 }); // local은 설치해준 Strategy의 이름
 
+export const githubLoginCallback = (accessToken, refreshToken, profile, cb) => {
+  console.log(accessToken, refreshToken, profile, cb);
+};
+
 export const logout = (req, res) => {
   //To Do: Process Log Out
   req.logout();
