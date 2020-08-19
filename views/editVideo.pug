@@ -6,7 +6,8 @@ block content
             input(type="text", placeholder="Title", name="title", value=video.title)
             textarea(name="description", placeholder="Description")=video.description
             input(type="submit", value="Update Video")
-        a.form-container__link.form-container__link--delete(href=routes.deleteVideo(video.id)) Delete Video 
+        a.form-container__link(href=routes.deleteVideo(video.id))
+            button.delete Delete Video 
         //- 
          비디오의 ID와 함께 함수를실행 비디오의 Object를 가지고 있음
          왜냐면 우리가 (videoController에서 getEditVideo의 res.render~ 에서) 템플릿에서 전달했기 때문   
