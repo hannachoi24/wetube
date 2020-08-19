@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   githubId: Number,
 });
 
-UserSchema.plugin(passportLocalMongoose, { usernameField: "email " });
+UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 
 const model = mongoose.model("User", UserSchema); // ("이름", 어디에서부터오는지)
 
