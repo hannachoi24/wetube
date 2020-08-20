@@ -44,7 +44,7 @@ export const githubLogin = passport.authenticate("github");
 export const githubLoginCallback = async (_, __, profile, cb) => {
   // cb는 passport에서 제공되는 callback함수(인증에 성공한 상황에서 호출됨)
   const {
-    _json: { id, avatar_url, name, email },
+    _json: { id, avatar_url: avataUrl, name, email },
   } = profile;
   try {
     const user = await User.findOne({ email });
@@ -57,7 +57,7 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
       email,
       name,
       githubId: id,
-      avataUrl: avatar_url,
+      avataUrl,
     });
     return cb(null, newUser);
   } catch (error) {
@@ -73,6 +73,12 @@ export const logout = (req, res) => {
   //To Do: Process Log Out
   req.logout();
   res.redirect(routes.home);
+};
+
+export const getMe = (req, res) => {
+  // 해당 id를 가진 사용자를 아래 userDetail에서 찾도록 하는게 싫어서
+  res.render("userDetail", { pageTitle: "User Detail", user: req.user }); // user(바로 지금 로그인한 사용자)를 req.user로 전달
+  // userDetail 페이지는 user라는 obj를 전달받음
 };
 
 export const userDetail = (req, res) =>

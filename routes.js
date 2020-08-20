@@ -11,6 +11,7 @@ const USERS = "/users";
 const USER_DETAIL = "/:id"; //:는 express가 변하는 값이라고 인식 -> 어떤 값도 될 수 있음
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
+const ME = "/me";
 
 // Videos
 
@@ -71,6 +72,7 @@ const routes = {
   },
   gitHub: GITHUB,
   githubCallback: GITHUB_CALLBACK,
+  me: ME,
 };
 
 export default routes;

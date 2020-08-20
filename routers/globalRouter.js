@@ -10,6 +10,7 @@ import {
   postLogin,
   githubLogin,
   postGithubLogIn,
+  getMe,
 } from "../controllers/userController";
 import { onlyPublic, onlyPrivate } from "../middlewares";
 
@@ -25,12 +26,14 @@ globalRouter.get(routes.home, home); // home은 controllers/videoController에�
 globalRouter.get(routes.search, search); // search도 마찬가지
 globalRouter.get(routes.logout, onlyPrivate, logout);
 
-globalRouter.get(routes.gitHub, githubLogin);
+globalRouter.get(routes.gitHub, githubLogin); // githubLogin는 우리를 깃헙웹사이트로 보내주는 역할
 
 globalRouter.get(
   routes.githubCallback,
   passport.authenticate("github", { failureRedirect: "/login" }),
   postGithubLogIn // userController에 있음
 );
+
+globalRouter.get(routes.me, getMe);
 
 export default globalRouter;
