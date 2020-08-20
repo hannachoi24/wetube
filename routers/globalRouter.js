@@ -1,4 +1,5 @@
 import express from "express";
+import passport from "passport";
 import routes from "../routes"; // 이 디렉토리 바깥에서 실행되야되기 때문에 ../
 import { home, search } from "../controllers/videoController";
 import {
@@ -7,8 +8,10 @@ import {
   logout,
   postJoin,
   postLogin,
+  githubLogin,
+  postGithubLogIn,
 } from "../controllers/userController";
-import { onlyPublic } from "../middlewares";
+import { onlyPublic, onlyPrivate } from "../middlewares";
 
 const globalRouter = express.Router();
 
@@ -20,6 +23,14 @@ globalRouter.post(routes.login, onlyPublic, postLogin);
 
 globalRouter.get(routes.home, home); // home은 controllers/videoController에서 home을 auto import함 -> export 해줬을 때만 작동
 globalRouter.get(routes.search, search); // search도 마찬가지
-globalRouter.get(routes.logout, logout);
+globalRouter.get(routes.logout, onlyPrivate, logout);
+
+globalRouter.get(routes.gitHub, githubLogin);
+
+globalRouter.get(
+  routes.githubCallback,
+  passport.authenticate("github", { failureRedirect: "/login" }),
+  postGithubLogIn // userController에 있음
+);
 
 export default globalRouter;

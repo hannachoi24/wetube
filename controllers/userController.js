@@ -27,8 +27,6 @@ export const postJoin = async (req, res, next) => {
       console.log(error);
       res.redirect(routes.home);
     }
-    //To Do: Log user in
-    //위에다 import routes를 해줘야함(외부디렉토리형식으로)
   }
 };
 // join하면 login창으로가고 그다음 home화면으로 갈 수 있게 하려고 -> globalRouter.js에서도 이름 변경
@@ -41,8 +39,14 @@ export const postLogin = passport.authenticate("local", {
   successRedirect: routes.home,
 }); // local은 설치해준 Strategy의 이름
 
+export const githubLogin = passport.authenticate("github");
+
 export const githubLoginCallback = (accessToken, refreshToken, profile, cb) => {
   console.log(accessToken, refreshToken, profile, cb);
+};
+
+export const postGithubLogIn = (req, res) => {
+  res.send(routes.home);
 };
 
 export const logout = (req, res) => {
