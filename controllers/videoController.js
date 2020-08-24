@@ -51,7 +51,7 @@ export const postUpload = async (req, res) => {
     creator: req.user.id,
     // 여기있는 fileUrl, title, description은 videoDB의 속성이다.
   });
-  req.user.videos.push(newVideo._id);
+  req.user.videos.push(newVideo.id);
   req.user.save();
   res.redirect(routes.videoDetail(newVideo.id));
 };
@@ -64,7 +64,6 @@ export const videoDetail = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id).populate("creator"); // id를 받고 query로 보내짐, populate를 object ID 타입에만 쓸 수 있음
-    console.log(video);
     res.render("videoDetail", { pageTitle: video.title, video }); // video 변수는 Data를 템플릿에 전달
   } catch (error) {
     res.redirect(routes.home);
@@ -79,7 +78,11 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video }); // 마지막 인자 video는 찾은 video를 전달하는 것
+    if (Video.creator !== req.user.id) {
+      throw Error();
+    } else {
+      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video }); // 마지막 인자 video는 찾은 video를 전달하는 것
+    }
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -105,7 +108,12 @@ export const deleteVideo = async (req, res) => {
     params: { id },
   } = req;
   try {
-    await Video.findOneAndRemove({ _id: id }); // video를 찾아와 삭제
+    const video = await Video.findById(id);
+    if (Video.creator !== req.user.id) {
+      throw Error();
+    } else {
+      await Video.findOneAndRemove({ _id: id }); // video를 찾아와 삭제
+    }
   } catch (error) {
     console.log(error);
   }
