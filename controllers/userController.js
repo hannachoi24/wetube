@@ -61,12 +61,12 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
     });
     return cb(null, newUser);
   } catch (error) {
-    return cb(error);
+    return cb(error, null);
   }
 };
 
 export const postGithubLogIn = (req, res) => {
-  res.send(routes.home);
+  res.redirect(routes.home);
 };
 
 export const facebookLogin = passport.authenticate("facebook");
