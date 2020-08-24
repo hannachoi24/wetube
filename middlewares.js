@@ -6,6 +6,8 @@ const multerVideo = multer({ dest: "uploads/videos/" }); // /uploads/videos/ 는
 // file을 Upload하고 URL을 반환하는 middleware가 필요
 // const multerAvatar = multer({ dest: "uploads/avatars/" });
 
+const multerAvatar = multer({ dest: "uploads/avatars/" });
+
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "WeTube";
   res.locals.routes = routes;
@@ -32,4 +34,4 @@ export const onlyPrivate = (req, res, next) => {
 };
 
 export const uploadVideo = multerVideo.single("videoFile"); // single은 오직 하나의 파일만 Upload할 수 있음
-// export const uploadAvatar = multerAvatar.single("avatar");
+export const uploadAvatar = multerAvatar.single("avatar");

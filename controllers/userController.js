@@ -44,7 +44,7 @@ export const githubLogin = passport.authenticate("github");
 export const githubLoginCallback = async (_, __, profile, cb) => {
   // cb는 passport에서 제공되는 callback함수(인증에 성공한 상황에서 호출됨)
   const {
-    _json: { id, avatar_url: avataUrl, name, email },
+    _json: { id, avatar_url: avatarUrl, name, email },
   } = profile;
   try {
     const user = await User.findOne({ email });
@@ -57,11 +57,11 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
       email,
       name,
       githubId: id,
-      avataUrl,
+      avatarUrl,
     });
     return cb(null, newUser);
   } catch (error) {
-    return cb(error, null);
+    return cb(error);
   }
 };
 
@@ -123,8 +123,28 @@ export const userDetail = async (req, res) => {
   }
 };
 
-export const editProfile = (req, res) =>
+export const getEditProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit Profile" });
+
+export const postEditProfile = async (req, res) => {
+  const {
+    body: { name, email },
+    file,
+  } = req;
+  try {
+    await User.findByIdAndUpdate(req.user.id, {
+      name,
+      email,
+      avatarUrl: file ? `uploads/avatars/${file.filename}` : req.user.avatarUrl, // 만약 유저가 파일을 추가하지 않으면 avatarUrl를 중복해서 쓰길 원치 않아 현재 있는 걸 줌
+    }); // user 얻기
+    console.log(file);
+    console.log(req.user);
+    res.redirect(routes.me);
+  } catch (error) {
+    res.redirect(`/users${routes.editProfile}`);
+  }
+};
+
 export const changePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });
 
