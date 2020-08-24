@@ -7,6 +7,18 @@ const UserSchema = new mongoose.Schema({
   avatarUrl: String,
   facebookId: Number,
   githubId: Number,
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId, //이 comment는 video와 연결되어 있음
+      ref: "Comment", // 어떤 objectID가 어느 model에서 온건지를 알려줌
+    },
+  ],
+  videos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });

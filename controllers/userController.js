@@ -133,20 +133,39 @@ export const postEditProfile = async (req, res) => {
   } = req;
   try {
     await User.findByIdAndUpdate(req.user.id, {
+      // user객체가 request안에 있음
       name,
       email,
       avatarUrl: file ? `uploads/avatars/${file.filename}` : req.user.avatarUrl, // 만약 유저가 파일을 추가하지 않으면 avatarUrl를 중복해서 쓰길 원치 않아 현재 있는 걸 줌
     }); // user 얻기
     console.log(file);
     console.log(req.user);
-    res.redirect(routes.me);
+    res.redirect(routes.me); // 이미 있기 때문에 내 유저를 찾을 필요가 없어서
   } catch (error) {
     res.redirect(`/users${routes.editProfile}`);
   }
 };
 
-export const changePassword = (req, res) =>
+export const getChangePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });
+
+export const postChangePassword = async (req, res) => {
+  const {
+    body: { oldPassword, newPassword, newPassword1 },
+  } = req;
+  try {
+    if (newPassword !== newPassword1) {
+      res.status(400);
+      res.redirect(`/users/${routes.changePassword}`);
+      return;
+    }
+    await req.user.changePassword(oldPassword, newPassword);
+    res.redirect(routes.me);
+  } catch (error) {
+    res.status(400);
+    res.redirect(`/users/${routes.changePassword}`);
+  }
+};
 
 /*
 res.send말고 HTML 페이지를 넘기려면 res.render or res.redirect를 써야함

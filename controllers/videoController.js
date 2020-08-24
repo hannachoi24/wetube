@@ -32,6 +32,8 @@ export const search = async (req, res) => {
   res.render("search", { pageTitle: "Search", searchingBy, videos });
 };
 
+// Upload
+
 // upload 또한 upload를 준비하기 위한 get 페이지와 실제 데이터를 보내는 post 페이지가 필요하다.
 export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
@@ -46,23 +48,30 @@ export const postUpload = async (req, res) => {
     fileUrl: path,
     title, // 위와같음
     description,
+    creator: req.user.id,
     // 여기있는 fileUrl, title, description은 videoDB의 속성이다.
   });
-  console.log(newVideo);
+  req.user.videos.push(newVideo._id);
+  req.user.save();
   res.redirect(routes.videoDetail(newVideo.id));
 };
+
+// Video Detail
 
 export const videoDetail = async (req, res) => {
   const {
     params: { id }, //URL로 부터 id를 받아옴
   } = req;
   try {
-    const video = await Video.findById(id); // id를 받고 query로 보내짐
+    const video = await Video.findById(id).populate("creator"); // id를 받고 query로 보내짐, populate를 object ID 타입에만 쓸 수 있음
+    console.log(video);
     res.render("videoDetail", { pageTitle: video.title, video }); // video 변수는 Data를 템플릿에 전달
   } catch (error) {
     res.redirect(routes.home);
   }
 };
+
+// EditVideo
 
 export const getEditVideo = async (req, res) => {
   const {
@@ -88,6 +97,8 @@ export const postEditVideo = async (req, res) => {
     res.redirect(routes.home);
   }
 };
+
+// DeleteVideo
 
 export const deleteVideo = async (req, res) => {
   const {
