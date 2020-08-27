@@ -76,7 +76,7 @@ const formatDate = (seconds) => {
 };
 
 function getCurrentTime() {
-  getCurrentTime.innerHTML = formatDate(videoPlayer.currentTime); // getTime은 한번만 일어남 -> 아래에 setInteval을 해줌
+  getCurrentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime)); // getTime은 한번만 일어남 -> 아래에 setInteval을 해줌
 }
 
 function setTotalTime() {
@@ -85,11 +85,17 @@ function setTotalTime() {
   setInterval(getCurrentTime, 1000); // getCurrentTime을 매초마다 호출 하게 한다
 }
 
+function handleEnded() {
+  videoPlayer.currentTime = 0;
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+
 function init() {
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick); // 우리가 이 페이지에 있다는 걸 체크하기 위해서
   fullScrnBtn.addEventListener("click", goFullScreen);
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("ended", handleEnded); // 비디오가 끝나면 다시 처음으로 돌아가서 멈추게함
 }
 
 if (videoContainer) {
