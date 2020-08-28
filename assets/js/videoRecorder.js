@@ -1,18 +1,38 @@
 const recorderContainer = document.getElementById("jsRecordContainer");
 const recordBtn = document.getElementById("jsRecordBtn");
 const videoPreview = document.getElementById("jsVideoPreview");
+// media devices navigator mdn -> video API
 
 let streamObject;
+let videoRecorder;
+
+const handleVideoData = (event) => {
+  const { data: videoFile } = event;
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(videoFile); // 이 파일에서 부터 URL을 생성
+  link.download = "recorded.webm"; // 다운로드 파일이름
+  document.body.appendChild(link); // link를 body안에 넣어줌
+  link.click();
+};
 
 const handleVideoData = (event) => {
   // stream에서 가진 video를 recording 하는 것
   console.log(event);
 };
 
+const stopRecording = () => {
+  // 레코딩이 다 끝났을때만 데이터를 얻게 됨
+  videoRecorder.stop();
+  recordBtn.removeEventListener("click", stopRecording);
+  recordBtn.addEventListener("click", getVideo);
+  recordBtn.innerHTML = "Start recording";
+};
+
 const startRecording = () => {
-  const videoRecorder = new MediaRecorder(streamObject);
+  videoRecorder = new MediaRecorder(streamObject);
   videoRecorder.start();
   videoRecorder.addEventListener("dataavailable", handleVideoData);
+  recordBtn.addEventListener("click", stopRecording);
 };
 
 const getVideo = async () => {
