@@ -13,6 +13,7 @@ import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+import apiRouter from "./routers/apiRouter";
 
 import "./passport";
 
@@ -48,5 +49,6 @@ app.use(localsMiddleware); //local변수에 접근하도록하기위해
 app.use(routes.home, globalRouter); //검색, 홈 등등을 다룸
 app.use(routes.users, userRouter); //누군가 /user 경로에 접속하면 이 Router 전체를 사용하겠다는 의미
 app.use(routes.videos, videoRouter);
+app.use(routes.api, apiRouter);
 
 export default app; //누군가가 내 파일을 불러올 때(import) app obj를 주겠다는 의미(app.js를 init.js에서 사용)

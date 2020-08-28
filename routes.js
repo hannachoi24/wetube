@@ -31,6 +31,11 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 const FB = "/auth/facebook";
 const FB_CALLBACK = "/auth/facebook/callback";
 
+// API(server와 통신하기 위한 URL)
+
+const API = "/api";
+const REGISTER_VIEW = "/:id/view";
+
 //객체생성
 
 const routes = {
@@ -80,6 +85,8 @@ const routes = {
   me: ME,
   facebook: FB,
   facebookCallback: FB_CALLBACK,
+  api: API,
+  registerView: REGISTER_VIEW,
 };
 
 export default routes;

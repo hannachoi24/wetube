@@ -119,3 +119,22 @@ export const deleteVideo = async (req, res) => {
   }
   res.redirect(routes.home);
 };
+
+// Register Video View
+
+export const postRegisterView = async (req, res) => {
+  // 누군가 postRegisterView 이 URL로 오면 아래를 수행
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id); // 비디오를 찾았다면 아래를 수행
+    video.views += 1;
+    video.save();
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+}; // 템플릿이 없음 (오직 server하고만 소통한다는 의미)
