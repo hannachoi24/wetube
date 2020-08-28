@@ -21,14 +21,14 @@ function handlePlayClick() {
 
 function handleVolumeClick() {
   if (videoPlayer.muted) {
-    videoPlayer.muted = false;
+    videoPlayer.muted = false; // 갱신
     volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
     volumeRange.value = videoPlayer.volume;
   } else {
     volumeRange.value = 0;
     videoPlayer.muted = true;
     volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-  }
+  } // 소리키우기, 음소거 함수 두개로 할 수 있지만 소리키우기 함수가 없어서 음소거에서 두부류로 나눠서 한 것
 }
 
 function exitFullScreen() {

@@ -2,6 +2,9 @@ extends layouts/main
 
 block content
     .form-container
+        .record-container#jsRecordContainer
+            video#jsVideoPreview
+            button#jsRecordBtn Start Recording
         form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
             div.fileUpload 
                 label(for="file") Video File
@@ -9,3 +12,6 @@ block content
             input(type="text", placeholder="Title", name="title")
             textarea(name="description", placeholder="Description")
             input(type="submit", value="Upload Video")
+
+
+//- #js~ 가 있다는 것은 addEventListener 같은 걸 할 수 있다는 의미
