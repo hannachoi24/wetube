@@ -15,11 +15,6 @@ const handleVideoData = (event) => {
   link.click();
 };
 
-const handleVideoData = (event) => {
-  // stream에서 가진 video를 recording 하는 것
-  console.log(event);
-};
-
 const stopRecording = () => {
   // 레코딩이 다 끝났을때만 데이터를 얻게 됨
   videoRecorder.stop();

@@ -148,16 +148,16 @@ export const postAddComment = async (req, res) => {
   // 정보를 여기에다가 보내고 싶어서 post
   const {
     params: { id },
-    body: { Comment },
+    body: { comment },
     user,
   } = req;
   try {
     const video = await Video.findById(id);
     const newComment = await Comment.create({
-      text: Comment, // 위에 body에서 온 것
+      text: comment, // 위에 body에서 온 것
       creator: user.id,
     });
-    video.Comments.push(newComment.id); // Video.js 참조, comment id를 video comments에 넣어줌
+    video.comments.push(newComment.id); // Video.js 참조, comment id를 video comments에 넣어줌
     video.save();
   } catch (error) {
     res.status(400);

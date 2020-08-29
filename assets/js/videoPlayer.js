@@ -1,4 +1,5 @@
 import { doc } from "prettier";
+import getBlobDuration from "get-blob-duration";
 
 const videoContainer = document.getElementById("jsVideoPlayer");
 const videoPlayer = document.querySelector("#jsVideoPlayer video"); //("selectID")
@@ -89,8 +90,11 @@ function getCurrentTime() {
   getCurrentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime)); // getTime은 한번만 일어남 -> 아래에 setInteval을 해줌
 }
 
-function setTotalTime() {
-  const totalTimeString = formatDate(videoPlayer.duration);
+async function setTotalTime() {
+  const blob = await fetch(videoPlayer.src).then((response) => response.blob());
+  const duration = await getBlobDuration(blob);
+  console.log(duration);
+  const totalTimeString = formatDate(duration);
   totalTime.innerHTML = totalTimeString;
   setInterval(getCurrentTime, 1000); // getCurrentTime을 매초마다 호출 하게 한다
 }
