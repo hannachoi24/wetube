@@ -1,5 +1,6 @@
 import routes from "../routes"; //default export할 때는 이런형식으로 import
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 
 // Home
 
@@ -63,7 +64,9 @@ export const videoDetail = async (req, res) => {
     params: { id }, //URL로 부터 id를 받아옴
   } = req;
   try {
-    const video = await Video.findById(id).populate("creator"); // id를 받고 query로 보내짐, populate를 object ID 타입에만 쓸 수 있음
+    const video = await Video.findById(id)
+      .populate("creator") // 우리가 creator, comments 내용을 가지고 오고 싶으면 populate를 사용
+      .populate("comments"); // id를 받고 query로 보내짐, populate를 object ID 타입에만 쓸 수 있음
     res.render("videoDetail", { pageTitle: video.title, video }); // video 변수는 Data를 템플릿에 전달
   } catch (error) {
     res.redirect(routes.home);
@@ -138,3 +141,27 @@ export const postRegisterView = async (req, res) => {
     res.end();
   }
 }; // 템플릿이 없음 (오직 server하고만 소통한다는 의미)
+
+// Add Comment
+
+export const postAddComment = async (req, res) => {
+  // 정보를 여기에다가 보내고 싶어서 post
+  const {
+    params: { id },
+    body: { Comment },
+    user,
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    const newComment = await Comment.create({
+      text: Comment, // 위에 body에서 온 것
+      creator: user.id,
+    });
+    video.Comments.push(newComment.id); // Video.js 참조, comment id를 video comments에 넣어줌
+    video.save();
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
