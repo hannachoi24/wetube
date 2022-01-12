@@ -6,7 +6,7 @@ Node.js를 사용하여 나만의 Youtube 만들어보기
 Create your own Youtube site using Node.js.
 
 ![Youtube (1)](https://user-images.githubusercontent.com/66726731/149139950-1f63bfd3-4895-48df-81bc-de98b5f374ed.png)
-![Youtube(2)](https://user-images.githubusercontent.com/66726731/149139977-f3e6d043-7305-4720-a005-31fba69cc818.jpg)
+![Youtube(2)](https://user-images.githubusercontent.com/66726731/149140269-b42e44ba-8745-4aeb-acbf-e20e96dfb10e.jpg)
 ![Youtube(4)](https://user-images.githubusercontent.com/66726731/149140004-7de8b03c-0a95-4ace-b3f4-095692ecbe11.jpg)
 
 
