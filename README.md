@@ -79,8 +79,7 @@ I just recommend run both at the same time.
 [Axios](https://www.npmjs.com/package/axios)  
 [AWS SDK](https://aws.amazon.com/ko/sdk-for-node-js/)
 
-![image](https://user-images.githubusercontent.com/66726731/113316637-8b116200-9349-11eb-84ef-052c4f405ad7.png)
-
+![아키텍쳐_](https://user-images.githubusercontent.com/66726731/149143123-8d8ed19a-6215-44e8-8111-40de1440a3e6.png)
 
 ## Pages:
 
